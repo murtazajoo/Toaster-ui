@@ -1,0 +1,30 @@
+{
+  "name": "my-toasts-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "test"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-jsdom"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.21.5",
+    "css-loader": "^6.7.3",
+    "esm": "^3.2.25",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
+  }
+}
