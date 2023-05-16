@@ -1,22 +1,42 @@
-export default class Toast {
+class Toast {
   constructor(content, type = "default", options = {}) {
+    this.id = options.id || this.generateId();
     this.content = content;
     this.type = type;
+    this.allowHtml = options.allowHtml || false; // Whether the toast should allow HTML content
+    this.autoClose =
+      options.autoClose === false
+        ? false
+        : this.type === "loading"
+        ? false
+        : true; // Whether the toast should automatically close after the duration
     this.duration = options.duration || 3000; // Default duration of 3 seconds
     this.dismissTimeout = null;
     this.onClose = options.onClose || null; // Custom callback function on toast close
-    this.createToastElement();
+    this.createToastElement(this.content, this.type, this.duration);
     this.setCustomStyles(options.styles);
   }
 
-  createToastElement() {
+  createToastElement(content, type, duration) {
     this.toastElement = document.createElement("div");
-    this.toastElement.classList.add("toast");
-    this.toastElement.classList.add(`toast--${this.type}`);
-    this.toastElement.textContent = this.content;
+    this.toastElement.classList.add("toaster-ui-lib");
+    this.toastElement.classList.add(`toaster-ui-lib-${type}`);
+    this.toastElement.style.setProperty("--timer", ` ${duration}ms`);
+    this.toastElement.style.setProperty(
+      "--display",
+      this.autoClose ? "block" : "none"
+    );
+    if (this.allowHtml) {
+      this.toastElement.innerHTML =
+        type === "loading"
+          ? `<div class="toaster-ui-lib-loader"></div>` + content
+          : content;
+    } else {
+      this.toastElement.innerText = content;
+    }
 
     const closeButton = document.createElement("span");
-    closeButton.classList.add("toast-close");
+    closeButton.classList.add("toaster-ui-lib-close");
     closeButton.innerHTML = "&times;";
     closeButton.addEventListener("click", () => {
       this.close();
@@ -25,39 +45,77 @@ export default class Toast {
     this.toastElement.appendChild(closeButton);
   }
 
+  generateId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+  }
+
+  update(content, type, options = {}, existingToastElement) {
+    this.content = content;
+    this.type = type || existingToastElement.type;
+    this.allowHtml = options.allowHtml || existingToastElement.allowHtml;
+    this.autoClose =
+      options.autoClose !== undefined
+        ? options.autoClose === false
+          ? false
+          : true
+        : existingToastElement.type === "loading"
+        ? true
+        : existingToastElement.autoClose;
+    this.onClose = options.onClose || existingToastElement.onClose;
+    this.duration = options.duration || existingToastElement.duration;
+    this.setCustomStyles(options.styles || existingToastElement.styles);
+
+    if (this.toastElement) {
+      if (this.allowHtml) {
+        this.toastElement.innerHTML =
+          type === "loading"
+            ? `<div class="toaster-ui-lib-loader"></div>` + content
+            : content;
+      } else {
+        this.toastElement.innerText = content;
+      }
+      this.toastElement.className = `toaster-ui-lib toaster-ui-lib-${this.type}`;
+      this.toastElement.style.setProperty("--timer", `${this.duration}ms`);
+      this.toastElement.style.setProperty(
+        "--display",
+        this.autoClose ? "block" : "none"
+      );
+    }
+
+    const closeButton = document.createElement("span");
+    closeButton.classList.add("toaster-ui-lib-close");
+    closeButton.innerHTML = "&times;";
+    closeButton.addEventListener("click", () => {
+      this.close();
+    });
+
+    this.toastElement.appendChild(closeButton);
+
+    if (this.autoClose === true) {
+      this.startDismissTimeout();
+    }
+  }
+
   setCustomStyles(styles) {
     if (styles && typeof styles === "object") {
       Object.assign(this.toastElement.style, styles);
     }
   }
 
-  setContent(content) {
-    this.content = content;
-    this.toastElement.textContent = this.content;
-  }
-
   setDuration(duration) {
     this.duration = duration;
   }
 
-  show(callback) {
+  show() {
     this.toastElement.style.opacity = "0";
-
-    // Trigger reflow to ensure the fade-in animation starts
-    // setTimeout is used to delay the reflow slightly
-    setTimeout(() => {
-      this.toastElement.style.opacity = "1";
-    }, 10);
-
-    this.startDismissTimeout(callback);
+    if (this.autoClose === true) {
+      this.startDismissTimeout();
+    }
   }
 
-  startDismissTimeout(callback) {
+  startDismissTimeout() {
     this.dismissTimeout = setTimeout(() => {
       this.close();
-      if (typeof callback === "function") {
-        callback();
-      }
     }, this.duration);
   }
 
@@ -66,7 +124,8 @@ export default class Toast {
       this.onClose(); // Execute the custom onClose callback
     }
 
-    this.toastElement.style.animationName = "slide-out-blurred-right"; // Start closing animation
+    this.toastElement.style.animation =
+      "toaster-ui-lib-slide-out-blurred-right 0.6s cubic-bezier(0.445, 0.05, 0.55, 0.95) both"; // Start closing animation
 
     // Remove the toast element from the container after the animation ends
     this.toastElement.addEventListener("animationend", () => {
@@ -77,3 +136,5 @@ export default class Toast {
     });
   }
 }
+
+module.exports = Toast;

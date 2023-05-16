@@ -6,7 +6,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
-    library: "Toaster",
+    library: "ToasterUi",
+    libraryTarget: "umd",
+    umdNamedDefine: true,
   },
   module: {
     rules: [

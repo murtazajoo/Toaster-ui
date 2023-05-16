@@ -1,36 +1,30 @@
-import "./toasts.css";
-import Toast from "./Toast.js";
+require("./toasts.css");
+const Toast = require("./Toast.js");
 
-class ToastManager {
+class ToasterUi {
   constructor() {
-    this.toastQueue = [];
-    this.isDisplayingToast = false;
+    this.toastMap = new Map(); // Use a Map to store the toasts with their IDs
     this.container = document.createElement("div");
-    this.container.classList.add("toast-container");
+    this.container.classList.add("toaster-ui-lib-container");
     document.body.appendChild(this.container);
   }
 
   addToast(content, type = "default", options = {}) {
     const toast = new Toast(content, type, options);
-    this.toastQueue.push(toast);
-
-    this.displayNextToast();
+    // this.container.appendChild(toast.toastElement);
+    this.container.insertBefore(toast.toastElement, this.container.firstChild);
+    this.toastMap.set(toast.id, toast); // Store the toast in the Map using its ID
+    toast.show();
+    return toast.id; // Return the ID of the added toast
   }
 
-  displayNextToast() {
-    if (this.toastQueue.length > 0) {
-      this.isDisplayingToast = true;
-      const toast = this.toastQueue.shift(); // Retrieve the first toast from the queue
-      this.container.insertBefore(
-        toast.toastElement,
-        this.container.firstChild
-      );
-      toast.show(() => {
-        this.isDisplayingToast = false;
-        this.displayNextToast();
-      });
+  updateToast(id, content, type, options = {}) {
+    const toast = this.toastMap.get(id); // Retrieve the toast using its ID from the Map
+    if (toast) {
+      console.log(toast);
+      toast.update(content, type, options, toast);
     }
   }
 }
 
-export { Toast, ToastManager };
+module.exports = ToasterUi;
