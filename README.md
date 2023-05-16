@@ -12,11 +12,11 @@ To use Toaster-Ui, you have two options for installation:
 
 Include the following script tag in your HTML file:
 
-    <script src="https://unpkg.com/toaster-ui@1.0.0/dist/main.js"></script>
+    <script src="https://unpkg.com/toaster-ui@1.1.5/dist/main.js"></script>
 
 or
 
-    <script src="https://cdn.jsdelivr.net/npm/toaster-ui@1.0.0/dist/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toaster-ui@1.1.5/dist/main.js"></script>
 
 ### Option 2: NPM
 
