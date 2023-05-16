@@ -3,7 +3,6 @@
 
 const toastManager = new ToasterUi();
 
-//custo style toggle
 let customStyle = false;
 const customStyleToggle = document.getElementById("customStyleToggle");
 const customStyleContainer = document.getElementById("customStyleContainer");
@@ -93,7 +92,7 @@ form.addEventListener("submit", function (event) {
 // Create a new instance of ToastManager
 const toastManager = new Toaster.ToastManager();
 
-toatsManager.addToast('${content}', "${selectedType}", {
+toastManager.addToast('${content}', "${selectedType}", {
     autoClose: ${autoClose === "true"},
     duration: ${duration === "" ? 3000 : duration},
     // Custom Styles, Please Edit the keys of the object to change the styles

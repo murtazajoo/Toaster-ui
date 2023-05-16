@@ -26,14 +26,22 @@ class Toast {
       "--display",
       this.autoClose ? "block" : "none"
     );
-    if (this.allowHtml) {
-      this.toastElement.innerHTML =
-        type === "loading"
-          ? `<div class="toaster-ui-lib-loader"></div>` + content
-          : content;
-    } else {
-      this.toastElement.innerText = content;
+
+    if (this.type === "loading") {
+      const loadingElement = document.createElement("div");
+      loadingElement.classList.add("toaster-ui-lib-loader");
+      this.toastElement.appendChild(loadingElement);
     }
+
+    const textElement = document.createElement("span");
+    textElement.classList.add("toaster-ui-lib-text");
+    if (this.allowHtml) {
+      textElement.innerHTML = `<span>${content}</span>`;
+    } else {
+      textElement.innerText = content;
+    }
+
+    this.toastElement.appendChild(textElement);
 
     const closeButton = document.createElement("span");
     closeButton.classList.add("toaster-ui-lib-close");
@@ -66,14 +74,6 @@ class Toast {
     this.setCustomStyles(options.styles || existingToastElement.styles);
 
     if (this.toastElement) {
-      if (this.allowHtml) {
-        this.toastElement.innerHTML =
-          type === "loading"
-            ? `<div class="toaster-ui-lib-loader"></div>` + content
-            : content;
-      } else {
-        this.toastElement.innerText = content;
-      }
       this.toastElement.className = `toaster-ui-lib toaster-ui-lib-${this.type}`;
       this.toastElement.style.setProperty("--timer", `${this.duration}ms`);
       this.toastElement.style.setProperty(
@@ -81,6 +81,23 @@ class Toast {
         this.autoClose ? "block" : "none"
       );
     }
+    this.toastElement.innerHTML = "";
+
+    if (this.type === "loading") {
+      const loadingElement = document.createElement("div");
+      loadingElement.classList.add("toaster-ui-lib-loader");
+      this.toastElement.appendChild(loadingElement);
+    }
+
+    const textElement = document.createElement("span");
+    textElement.classList.add("toaster-ui-lib-text");
+    if (this.allowHtml) {
+      textElement.innerHTML = `<span>${this.content}</span>`;
+    } else {
+      textElement.innerText = this.content;
+    }
+
+    this.toastElement.appendChild(textElement);
 
     const closeButton = document.createElement("span");
     closeButton.classList.add("toaster-ui-lib-close");
