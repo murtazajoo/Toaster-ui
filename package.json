@@ -13,7 +13,9 @@
   "files": [
     "dist"
   ],
+
   "scripts": {
+    "test": "",
     "build": "webpack --config webpack.config.js"
   },
   "author": "Murtaza Joo",
