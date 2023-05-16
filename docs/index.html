@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toaster-Ui</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/toaster-uii@1.0.2/dist/main.js"></script> -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://kit.fontawesome.com/1443690ef3.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="prism/prism.css" />
+    <!-- <script src="https://unpkg.com/toaster-uii@1.0.2/dist/main.js"> -->
+    <script src="../dist/main.js"></script>
+  </head>
+  <body>
+    <a
+      class="fork-btn d-block"
+      target="_blank"
+      href="https://github.com/murtazajoo/Toaster-ui"
+    >
+      <div>
+        <img
+          src="./github-mark-white.png"
+          class="img-fluid"
+          alt="github-logo"
+        />
+      </div>
+    </a>
+    <header>
+      <nav>
+        <h1>Toaster Ui</h1>
+        <ul>
+          <li><a href="#playground">Playground</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#usage">Usage</a></li>
+          <li><a href="#updating-a-toast">UpdateToast()</a></li>
+          <li><a href="#creating-custom-types">Custom Types</a></li>
+
+          <li><a href="#examples">Example</a></li>
+          <li><a href="#advanced" class="text-danger">Advanced</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <iframe
+        src="https://ghbtns.com/github-btn.html?user=murtazajoo&repo=Toaster-ui&type=fork&count=true&size=large"
+        frameborder="0"
+        scrolling="0"
+        width="170"
+        height="30"
+        title="GitHub"
+      ></iframe>
+
+      <iframe
+        src="https://ghbtns.com/github-btn.html?user=murtazajoo&repo=Toaster-ui&type=star&count=true&size=large"
+        frameborder="0"
+        scrolling="0"
+        width="170"
+        height="30"
+        title="GitHub"
+      ></iframe>
+      <div class="container mt-5">
+        <h1 class="lib-name">Toaster UI Library</h1>
+        <h5 class="text-success">Open-Source</h5>
+        <p class="my-3 text-muted h6">
+          Toaster UI is a lightweight JavaScript library for displaying toast
+          notifications on web pages. It provides a simple and customizable way
+          to show temporary messages or notifications to users. This
+          documentation will guide you through the installation process, usage
+          examples, and customization options of the library.
+        </p>
+        <h3 id="playground">playground</h3>
+      </div>
+
+      <div class="container">
+        <form class="bg-dark p-3">
+          <fieldset class="border border-dark border-4 px-3 py-2">
+            <legend class="mb-4">Type</legend>
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="dark-outlined"
+              autocomplete="off"
+              value="default"
+              checked
+            />
+            <label
+              class="btn rounded-pill btn-dark border border-1 border-light"
+              for="dark-outlined"
+              >default</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="success-outlined"
+              autocomplete="off"
+              value="success"
+            />
+            <label
+              class="btn rounded-pill btn-outline-success"
+              for="success-outlined"
+              >sucess</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="danger-outlined"
+              autocomplete="off"
+              value="error"
+            />
+            <label
+              class="btn rounded-pill btn-outline-danger"
+              for="danger-outlined"
+              >error</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="warning-outlined"
+              autocomplete="off"
+              value="warning"
+            />
+            <label
+              class="btn rounded-pill btn-outline-warning"
+              for="warning-outlined"
+              >warning</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="info-outlined"
+              autocomplete="off"
+              value="info"
+            />
+            <label class="btn rounded-pill btn-outline-info" for="info-outlined"
+              >info</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="loading-outlined"
+              autocomplete="off"
+              value="loading"
+            />
+            <label
+              class="btn rounded-pill btn-outline-light"
+              for="loading-outlined"
+              >loding</label
+            >
+          </fieldset>
+          <fieldset class="border border-dark border-4 px-3 py-2">
+            <legend for="content">content</legend>
+            <input
+              type="text"
+              placeholder="This is a Normal Toast."
+              class="form-control"
+              id="content"
+              value='<i class="fa-solid fa-volume-high fa-shake mx-3"></i> This is a Normal Toast.'
+            />
+          </fieldset>
+
+          <fieldset class="border border-dark border-4 px-3 py-2">
+            <legend class="mb-4">Options</legend>
+
+            <div class="border border-dark p-2 my-2">
+              <h6>allowHtml</h6>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                name="allowHtml"
+                id="allowHtml"
+                autocomplete="off"
+                value="true"
+                checked
+              />
+              <label class="" for="allowHtml">true</label>
+            </div>
+
+            <div class="border border-dark p-2 my-2">
+              <h6>autoClose</h6>
+              <input
+                type="radio"
+                class="btn-check"
+                name="autoClose"
+                id="autoclose-true"
+                autocomplete="off"
+                value="true"
+                checked
+              />
+              <label class="btn btn-outline-success" for="autoclose-true"
+                >true</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="autoClose"
+                id="autoclose-false"
+                autocomplete="off"
+                value="false"
+              />
+              <label class="btn btn-outline-info" for="autoclose-false"
+                >false</label
+              >
+            </div>
+
+            <div class="border border-dark p-2 my-2">
+              <h6>duration</h6>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="3000"
+                name="duration"
+                id="duration"
+                value="3000"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="border border-dark p-2 my-2">
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="customStyleToggle"
+                  value="option1"
+                />
+                <label class="form-check-label" for="customStyleToggle"
+                  ><h6>Enable Custom styles</h6></label
+                >
+              </div>
+              <div id="customStyleContainer">
+                <div class="form-control rounded-0">
+                  <label for="background">background:</label>
+                  <input type="color" id="background" />
+                </div>
+                <div class="form-control rounded-0">
+                  <label for="color">color:</label>
+                  <input type="color" value="#ffffff" id="color" />
+                </div>
+                <div class="form-control rounded-0">
+                  <label for="fontFamily">fontFamily:</label>
+                  <input
+                    type="text"
+                    value="arial"
+                    placeholder="arial"
+                    id="fontFamily"
+                  />
+                </div>
+                <div class="form-control rounded-0">
+                  <label for="borderRadius">borderRadius:</label>
+                  <input
+                    type="number"
+                    value="50"
+                    placeholder="100"
+                    id="borderRadius"
+                  />
+                </div>
+                <div class="form-control rounded-0">
+                  <label for="onclose " class="text-muted">onClose:</label>
+                  <input
+                    disabled
+                    type="text"
+                    class="form-control"
+                    placeholder="()=>{console.log(`Toast Closed`)}"
+                    id="onclose"
+                  />
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="border border-dark border-4 px-3 py-2 mb-5">
+            <button type="submit" class="btn btn-success">AddToast</button>
+          </fieldset>
+        </form>
+      </div>
+
+      <div class="container">
+        <h2>Copy Generated code</h2>
+        <pre>
+          <code id="code" class="language-js">
+            const toaster = new Toaster.toaster();
+            
+            toatsManager.addToast('This is a Normal Toast.' , "default", {
+                autoClose: true,
+                duration: 3000,
+                styles: {},
+                onClose: ()=>{console.log("Toast closed!");}
+            });
+          </code>
+        </pre>
+      </div>
+
+      <div class="border my-5"></div>
+
+      <div class="container">
+        <h2 id="installation">Installation</h2>
+        <p>To use Toaster-Ui, you have two options for installation:</p>
+        <h3 id="option-1-script-tag">Option 1: Script Tag</h3>
+        <p>Include the following script tag in your HTML file:</p>
+        <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/toaster-ui@1.0.0/dist/main.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+        <p>or</p>
+        <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.jsdelivr.net/npm/toaster-ui@1.0.0/dist/main.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+        <h3 id="option-2-npm">Option 2: NPM</h3>
+        <p>Install Toaster-Ui using npm:</p>
+        <pre><code class="lang-bash">npm <span class="hljs-selector-tag">i</span> toaster-ui
+</code></pre>
+        <h2 id="usage">Usage</h2>
+        <p>
+          Once Toaster-Ui is installed in your project, you can start using it
+          by following the instructions below.
+        </p>
+        <p>
+          If you imported the library using a module bundler like webpack or
+          Rollup:
+        </p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">import</span> ToasterUi <span class="hljs-keyword">from</span> <span class="hljs-string">'toaster-ui'</span>;
+</code></pre>
+        <p class="alert alert-info">
+          If you included the library using a script tag, there&#39;s no need to
+          import it explicitly.
+        </p>
+        <p>Create a new instance of ToasterUi:</p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> toaster = <span class="hljs-keyword">new</span> ToasterUi();
+</code></pre>
+        <h3 id="basic-usage">Basic Usage</h3>
+        <p>
+          To display a basic toast message, use the
+          <code>addToast()</code> method:
+        </p>
+        <pre><code class="lang-javascript">toaster.addToast(<span class="hljs-string">"This is a toast"</span>)<span class="hljs-comment">;</span>
+</code></pre>
+        <p>The <code>addToast()</code> method takes three parameters:</p>
+        <ul>
+          <li>
+            <code>content</code> (required): The message content of the toast.
+          </li>
+          <li>
+            <code>type</code> (optional): The type of the toast. It can be one
+            of the following: <code>default</code>, <code>success</code>,
+            <code>error</code>, <code>warning</code>, <code>info</code>,
+            <code>loading</code>. Default is <code>default</code>.
+          </li>
+          <li>
+            <code>options</code> (optional): Additional options to customize the
+            toast. See the <strong>Options</strong> section for more details.
+          </li>
+        </ul>
+        <h3 id="options">Options</h3>
+        <p>
+          The <code>addToast()</code> method&#39;s third parameter,
+          <code>options</code>, allows you to customize various aspects of the
+          toast. The available options are:
+        </p>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr class="table-dark">
+              <th>Option</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>duration</td>
+              <td>number</td>
+              <td>3000</td>
+              <td>
+                The duration in milliseconds that the toast should be displayed
+                before automatically closing.
+              </td>
+            </tr>
+            <tr>
+              <td>autoClose</td>
+              <td>boolean</td>
+              <td>true</td>
+              <td>
+                Specifies whether the toast should automatically close after the
+                duration. Set it to false to disable auto-closing.
+              </td>
+            </tr>
+            <tr>
+              <td>styles</td>
+              <td>object</td>
+              <td>null</td>
+              <td>
+                An object containing CSS styles to be applied to the toast
+                element.
+              </td>
+            </tr>
+            <tr>
+              <td>allowHtml</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>
+                Specifies whether HTML content should be allowed in the toast
+                message.
+              </td>
+            </tr>
+            <tr>
+              <td>onClose</td>
+              <td>function</td>
+              <td>()=&gt;{}</td>
+              <td>
+                A callback function to be executed when the toast is closed.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="updating-a-toast">Updating a Toast</h3>
+        <p>
+          To update a toast message after it has been displayed, you can use the
+          <code>updateToast()</code> method. This method requires the
+          <code>id</code> of the toast that needs to be updated, which is
+          returned when adding a toast.
+        </p>
+        <p>Here&#39;s an example of how to update a toast:</p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> toastId = toaster.addToast(<span class="hljs-string">"Initial toast content"</span>);
+
+<span class="hljs-comment">// To update the toast</span>
+toaster.updateToast(toastId, <span class="hljs-string">"New toast content"</span>, <span class="hljs-string">"success"</span>, { duration: <span class="hljs-number">5000</span> });
+</code></pre>
+        <p>The <code>updateToast()</code> method takes four parameters:</p>
+        <ul>
+          <li>
+            <code>id</code> (required): The ID of the toast to be updated.
+          </li>
+          <li>
+            <code>newContent</code> (optional): The new message content of the
+            toast.
+          </li>
+          <li><code>newType</code> (optional): The new type of the toast.</li>
+          <li>
+            <code>newOptions</code> (optional): New options to customize the
+            toast. Only the specified options will be updated, and the rest will
+            remain unchanged.
+          </li>
+        </ul>
+
+        <h3 id="manual-update-for-loading-toasts">
+          Manual Update for Loading Toasts
+        </h3>
+        <div class="alert alert-warning">
+          <p>
+            Toasts of type &quot;loading&quot; have their
+            <code>autoClose</code> option set to <code>false</code> by default,
+            requiring manual updates using the
+            <code>updateToast()</code> function. This allows you to control when
+            to close the toast and provide status updates to users. Use the
+            <code>updateToast()</code> function with the toast&#39;s ID to
+            modify its content, type, and other options as needed.
+          </p>
+        </div>
+
+        <p>
+          When the type of the toast is &quot;loading&quot;, the
+          <code>autoClose</code> option is automatically set to
+          <code>false</code>. This means that the toast will not close
+          automatically after a duration. Instead, you&#39;ll need to update the
+          toast manually using the <code>updateToast()</code> function to
+          indicate when the loading is complete or any other desired changes.
+        </p>
+        <p>
+          Here&#39;s an example of how to create a loading toast and manually
+          update it:
+        </p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> toastId = toaster.addToast(<span class="hljs-string">"Loading in progress"</span>, <span class="hljs-string">"loading"</span>);
+
+<span class="hljs-comment">// Simulate loading completion after 3 seconds</span>
+setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  toaster.updateToast(toastId, <span class="hljs-string">"Loading complete!"</span>, <span class="hljs-string">"success"</span>, { <span class="hljs-attr">autoClose</span>: <span class="hljs-literal">true</span> });
+}, <span class="hljs-number">3000</span>);
+</code></pre>
+        <p>
+          In this example, we first create a loading toast by setting the type
+          to &quot;loading&quot;. Since the <code>autoClose</code> option is set
+          to <code>false</code>, the toast will remain visible until we manually
+          update it. After a simulated loading process of 3 seconds, we use the
+          <code>updateToast()</code> function to change the toast&#39;s content,
+          type to &quot;success&quot;, and enable <code>autoClose</code> by
+          setting it to <code>true</code>. This causes the toast to
+          automatically close after the specified duration.
+        </p>
+        <p>
+          Remember, for loading toasts, you need to manually update the toast
+          using <code>updateToast()</code> to reflect changes or indicate
+          completion.
+        </p>
+
+        <div class="alert alert-info">
+          <h4 id="here-s-a-clarification-on-how-the-update-process-works-">
+            Here&#39;s a clarification on how the update process works:
+          </h4>
+          <p>
+            When using the <code>updateToast()</code> function, you can specify
+            new values for the <code>content</code>, <code>type</code>, and
+            <code>options</code> of the toast. If you omit any of these
+            parameters, the corresponding property of the toast will retain its
+            existing value.
+          </p>
+          <p>For example:</p>
+          <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> toastId = toaster.addToast(<span class="hljs-string">"Initial toast"</span>, <span class="hljs-string">"default"</span>, { duration: <span class="hljs-number">3000</span> });
+
+<span class="hljs-comment">// Update the toast without modifying the type or options</span>
+toaster.updateToast(toastId, <span class="hljs-string">"Updated toast"</span>);
+
+<span class="hljs-comment">// The toast will still have the "default" type and a duration of 3000</span>
+</code></pre>
+          <p>
+            In the example above, the <code>updateToast()</code> function is
+            called without providing a new <code>type</code> or
+            <code>options</code>. As a result, the toast will retain its
+            original type (&quot;default&quot;) and the
+            <code>duration</code> option of 3000 milliseconds.
+          </p>
+          <p>
+            However, if you explicitly provide a new <code>type</code> parameter
+            during the update, it will override the existing type:
+          </p>
+          <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> toastId = toaster.addToast(<span class="hljs-string">"Initial toast"</span>, <span class="hljs-string">"default"</span>, { duration: <span class="hljs-number">3000</span> });
+
+<span class="hljs-comment">// Update the toast and change its type</span>
+toaster.updateToast(toastId, <span class="hljs-string">"Updated toast"</span>, <span class="hljs-string">"success"</span>);
+
+<span class="hljs-comment">// The toast will now have the "success" type and a duration of 3000</span>
+</code></pre>
+          <p>
+            In this case, the <code>type</code> parameter is explicitly set to
+            &quot;success&quot; during the update, causing the toast to change
+            its type accordingly.
+          </p>
+          <p>
+            To update specific options while retaining the rest, you can pass
+            only the updated options as the <code>newOptions</code> parameter:
+          </p>
+          <pre><code class="lang-javascript">const toastId = toaster.addToast(<span class="hljs-string">"Initial toast"</span>, <span class="hljs-string">"default"</span>, { <span class="hljs-string">duration:</span> <span class="hljs-number">3000</span>, <span class="hljs-string">styles:</span> { <span class="hljs-string">color:</span> <span class="hljs-string">"blue"</span> } });
+
+<span class="hljs-comment">// Update the toast and change only the styles</span>
+toaster.updateToast(toastId, <span class="hljs-string">"Updated toast"</span>, <span class="hljs-literal">null</span>, { <span class="hljs-string">styles:</span> { <span class="hljs-string">color:</span> <span class="hljs-string">"red"</span> } });
+
+<span class="hljs-comment">// The toast will retain its type, duration, and the updated styles { color: "red" }</span>
+</code></pre>
+          <p>
+            In the example above, the <code>styles</code> option is updated
+            while retaining the existing type (&quot;default&quot;) and duration
+            (3000 milliseconds).
+          </p>
+          <p>
+            I apologize for any confusion caused by my previous response. Thank
+            you for bringing it to my attention, and I hope this clarifies the
+            behavior of updating options and types when using the
+            <code>updateToast()</code> function.
+          </p>
+        </div>
+
+        <p>
+          That&#39;s it! You now have That&#39;s it! You now have a basic
+          understanding of how to use Toaster-Ui in your web application. Below,
+          you&#39;ll find some additional examples and usage details to further
+          enhance your experience with the library.
+        </p>
+
+        <h3 id="creating-custom-types">Creating Custom Types</h3>
+        <p>
+          To create a custom toast type, you can define your own CSS class and
+          apply it to the toast element. Here&#39;s an example:
+        </p>
+        <pre><code class="lang-css">.toaster-ui-<span class="hljs-class"><span class="hljs-keyword">lib</span>-<span class="hljs-title">custom</span> {</span>
+  background-<span class="hljs-symbol">color:</span> <span class="hljs-comment">#ff00ff; /* Replace with your desired background color */</span>
+  /* Add any other custom styles here *<span class="hljs-regexp">/
+}</span>
+</code></pre>
+        <p>
+          You can apply the custom type to a toast by setting the
+          <code>type</code> parameter to your custom type name:
+        </p>
+        <pre><code class="lang-javascript"><span class="hljs-selector-tag">toaster</span><span class="hljs-selector-class">.addToast</span>(<span class="hljs-string">"Custom toast message"</span>, <span class="hljs-string">"custom"</span>);
+</code></pre>
+        <p>The toast will now have the custom type styling applied to it.</p>
+
+        <h3 id="examples">Examples</h3>
+        <h4 id="example-1-customizing-toast-styles">
+          Example 1: Customizing Toast Styles
+        </h4>
+        <p>
+          You can customize the styles of a toast by providing a
+          <code>styles</code> object in the options parameter. Here&#39;s an
+          example:
+        </p>
+        <pre><code class="lang-javascript">const <span class="hljs-keyword">options</span> = {
+  duration: <span class="hljs-number">2000</span>,
+  styles: {
+    backgroundColor: <span class="hljs-string">'#ff0000'</span>,
+    color: <span class="hljs-string">'#ffffff'</span>,
+    border: <span class="hljs-string">'1px solid #ffffff'</span>,
+  },
+};
+
+toaster.addToast(<span class="hljs-string">"Customized toast"</span>, <span class="hljs-string">"success"</span>, <span class="hljs-keyword">options</span>);
+</code></pre>
+        <h4 id="example-2-allowing-html-content">
+          Example 2: Allowing HTML Content
+        </h4>
+        <p>
+          To display HTML content in a toast message, set the
+          <code>allowHtml</code> option to <code>true</code>. Here&#39;s an
+          example:
+        </p>
+        <pre><code class="lang-javascript">const <span class="hljs-keyword">options</span> = {
+  allowHtml: <span class="hljs-keyword">true</span>,
+};
+
+toaster.addToast(<span class="hljs-string">"&lt;strong&gt;This is a bold toast message&lt;/strong&gt;"</span>, <span class="hljs-string">"info"</span>, <span class="hljs-keyword">options</span>);
+</code></pre>
+        <h4 id="example-3-handling-toast-closure">
+          Example 3: Handling Toast Closure
+        </h4>
+        <p>
+          You can specify a callback function to be executed when a toast is
+          closed by providing the <code>onClose</code> option. Here&#39;s an
+          example:
+        </p>
+        <pre><code class="lang-javascript">const options = {
+  onClose: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Toast closed!"</span>);
+  },
+};
+
+toaster.addToast(<span class="hljs-string">"Toast with closure callback"</span>, <span class="hljs-string">"default"</span>, options);
+</code></pre>
+
+        <h4 id="example-updating-toast">Example 4: Updating toast</h4>
+        <p>example of fetching data from an application using Toaster-Ui:</p>
+        <pre><code class="lang-javascript"><span class="hljs-keyword">const</span> toaster = <span class="hljs-keyword">new</span> ToasterUi();
+
+<span class="hljs-comment">// Create a function to fetch some data from the application</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dataFetch</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// Add a toast of type loading</span>
+  <span class="hljs-keyword">const</span> toastId = toaster.addToast(<span class="hljs-string">"Loading, please wait"</span>, <span class="hljs-string">"loading"</span>);
+
+  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">"https://jsonplaceholder.typicode.com/todos/1"</span>);
+
+  <span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      resolve(<span class="hljs-string">"Promise resolved."</span>);
+    }, <span class="hljs-number">2000</span>);
+  });
+
+  <span class="hljs-keyword">if</span> (data.status !== <span class="hljs-number">200</span>) {
+    <span class="hljs-comment">// Update the toast with error message</span>
+    toaster.updateToast(toastId, <span class="hljs-string">"Error while fetching data"</span>, <span class="hljs-string">"error"</span>);
+    <span class="hljs-keyword">return</span>;
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// Update the toast with success message</span>
+    toaster.updateToast(toastId, <span class="hljs-string">"Data fetched successfully"</span>, <span class="hljs-string">"success"</span>);
+  }
+
+  setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    toaster.updateToast(toastId, <span class="hljs-string">"Promise resolved"</span>, <span class="hljs-string">"success"</span>, {
+      <span class="hljs-attr">autoClose</span>: <span class="hljs-literal">true</span>,
+    });
+  }, <span class="hljs-number">2000</span>);
+
+  <span class="hljs-keyword">const</span> json = <span class="hljs-keyword">await</span> data.json();
+  <span class="hljs-keyword">return</span> json;
+}
+
+dataFetch();
+</code></pre>
+        <p>
+          In this example, the <code>dataFetch</code> function is created to
+          fetch data from an application. It starts by adding a toast of type
+          &quot;loading&quot; using <code>toaster.addToast</code> and assigns
+          the returned <code>toastId</code> to a variable.
+        </p>
+        <p>
+          Next, it makes an asynchronous <code>fetch</code> request to retrieve
+          data from the specified URL. It also simulates a promise being
+          resolved after a 2-second delay using <code>setTimeout</code>.
+        </p>
+        <p>
+          If the <code>data</code> response has a status other than 200,
+          indicating an error, the toast is updated with an error message using
+          <code>toaster.updateToast</code>. Otherwise, if the data is
+          successfully fetched, the toast is updated with a success message.
+        </p>
+        <p>
+          After 2 seconds, another toast update is triggered to display the
+          message &quot;Promise resolved&quot; with a success type, and the
+          <code>autoClose</code> option set to <code>true</code> to
+          automatically close the toast.
+        </p>
+        <p>
+          Finally, the fetched data is converted to JSON using
+          <code>data.json()</code> and returned.
+        </p>
+        <p>
+          When you run the <code>dataFetch</code> function, the toast messages
+          will be displayed in the Toaster-Ui component based on the progress
+          and status of the data fetching process.
+        </p>
+
+        <div class="alert alert-danger" id="advanced">
+          <h1>Customize Using Classes</h1>
+          <p>
+            Toaster-Ui is designed to be a standalone component that can be
+            easily integrated into any web application. However, if you want to
+            customize the container element.
+          </p>
+          <pre><code class="language-css">
+.toaster-ui-lib-container{
+  max-width: 500px;
+  left:0;
+}
+          </code></pre>
+
+          <!-- you can customize the Toast and the close Button in the toast -->
+
+          <h3>OR</h3>
+          <p>
+            if you want to customize the toast element, you can use the
+            following CSS classes:
+          </p>
+          <pre>
+          <code class="language-css">
+            .toaster-ui-lib {
+              /* custom styles for the toast element */
+              /* Add your custom styles here */
+            }
+            .toaster-ui-lib::after {
+              /* Add your custom styles here */
+            }
+            .toaster-ui-lib-close{
+              /* Add your custom styles here */
+            }
+            .toaster-ui-lib-loader{
+              /* Add your custom styles here */
+            }
+          </code>
+        </pre>
+        </div>
+
+        <h3 id="summary">Summary</h3>
+        <p>
+          Congratulations! You&#39;ve successfully learned how to install,
+          import, and use Toaster-Ui in your web application. You&#39;re now
+          equipped with the knowledge to display toast messages with custom
+          styles, handle toast closure, and take advantage of advanced features
+          offered by the library. Explore and experiment with the different
+          options and methods to enhance your user interface with informative
+          and visually appealing toast messages. Happy coding!
+        </p>
+      </div>
+
+      <div class="my-5">.</div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js" defer></script>
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const toastManager = new ToastManager();
+        // ...
+      });
+    </script> -->
+    <script src="prism/prism.js"></script>
+  </body>
+</html>
