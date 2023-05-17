@@ -1,5 +1,8 @@
 # Toaster-Ui Library Documentation
 
+
+![](https://media.giphy.com/media/SRmMCJLug43sQPIZOT/giphy.gif)
+
 ### OpenSource feel free to fork and make a pull request.
 
 Toaster-Ui is a lightweight JavaScript library that allows you to easily display toast messages in your web application. This documentation provides a comprehensive guide on how to install and use Toaster-Ui in your project.
